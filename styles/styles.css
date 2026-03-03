@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+
+/* tokens */
+:root {
+  --color-surface-primary: #E8E1D9;
+  --color-surface-secondary: #D3EEFF;
+  --color-surface-dark: #243743;
+  --color-text-primary: #3A2F2A;
+  --color-text-inverse: #E8F3ED;
+  --color-text-accent: #2F4F3A;
+  --color-accent-warm: #F3D6D0;
+  --color-accent-gold: #DEC978;
+  --font-heading: "DM Serif Display", serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --text-h1: clamp(3rem, 6vw, 4rem);
+  --text-h2: clamp(2rem, 4vw, 2.5rem);
+  --text-h3: 1.375rem;
+  --text-body: 1.125rem;
+  --text-label: 2.5rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --transition-default: 200ms ease;
+}
+
+/* reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-primary);
+}
+
+/* =========================
+   chapter frames layout
+========================== */
+.chapter {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+/* sky/soil horizon split at 55% */
+.chapter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-surface-secondary) 55%,
+    var(--color-surface-primary) 55%
+  );
+  z-index: 0;
+}
+
+.chapter--dark::before {
+  background: linear-gradient(
+    to bottom,
+    var(--color-surface-dark) 55%,
+    var(--color-surface-primary) 55%
+  );
+}
+
+/* left side text */
+.chapter-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-lg);
+  gap: var(--space-sm);
+}
+
+.chapter-label {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  color: var(--color-text-primary);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.chapter-heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  line-height: 1.15;
+  color: var(--color-text-primary);
+}
+
+.chapter-heading em {
+  font-style: italic;
+  color: var(--color-text-accent);
+}
+
+.chapter--dark .chapter-label,
+.chapter--dark .chapter-heading {
+  color: var(--color-text-inverse);
+}
+
+.chapter-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  max-width: 36ch;
+}
+
+.chapter-note {
+  font-size: 0.8rem;
+  color: var(--color-text-primary);
+  opacity: 0.4;
+  font-style: italic;
+  margin-top: var(--space-xs);
+}
+
+/* visual stuff */
+.chapter-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chapter-visual img {
+  max-width: 80%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+/* ch1 */
+#ch1 .chapter-visual img[alt="A seed packet"] {
+  position: absolute;
+  width: 40%;
+  left: 10%;
+  top: 15%;
+  transform: rotate(14deg);
+  transform-origin: top left;
+}
+
+#ch1 .chapter-visual img[alt="seeds"] {
+  position: absolute;
+  width: 9%;
+  left: 14%;
+  top: 44%;
+}
+
+/* =========================
+   ch2
+========================== */
+#ch2 .ch2-roots,
+#ch2 .ch2-sprout,
+#ch2 .drops {
+  position: absolute;
+  z-index: 1;
+}
+
+#ch2 .ch2-roots {
+  width: 33%;
+  right: 8%;
+  bottom: 0;
+}
+
+#ch2 .ch2-roots img,
+#ch2 .ch2-sprout img {
+  width: 100%;
+  display: block;
+}
+
+#ch2 .ch2-sprout {
+  width: 12%;
+  right: 18%;
+  bottom: 44%;
+}
+
+#ch2 .drops {
+  display: flex;
+  gap: 2.5%;
+  right: 10%;
+  top: 8%;
+}
+
+#ch2 .drops img {
+  width: 42px;
+}
+
+#ch2 .drops img:nth-child(1) { margin-top: 0rem; }
+#ch2 .drops img:nth-child(2) { margin-top: 3rem; }
+#ch2 .drops img:nth-child(3) { margin-top: 1rem; }
+
+/* =========================
+   ch3
+========================== */
+#ch3 .ch3-roots,
+#ch3 .ch3-sprout,
+#ch3 .ch3-watering-can,
+#ch3 .ch3-drop {
+  position: absolute;
+  z-index: 1;
+}
+
+#ch3 .ch3-roots {
+  width: 33%;
+  right: 8%;
+  bottom: 0;
+}
+
+#ch3 .ch3-roots img,
+#ch3 .ch3-sprout img {
+  width: 100%;
+  display: block;
+}
+
+#ch3 .ch3-sprout {
+  width: 12%;
+  right: 18%;
+  bottom: 44%;
+}
+
+#ch3 .ch3-watering-can {
+  width: 21%;
+  right: 5%;
+  top: 10%;
+}
+
+#ch3 .ch3-watering-can img {
+  width: 100%;
+  display: block;
+}
+
+/* slightly bigger raindrop, left of can */
+#ch3 .ch3-drop {
+  width: 4%;
+  right: 25%;
+  top: 32%;
+}
+
+#ch3 .ch3-drop img {
+  width: 100%;
+  display: block;
+}
+
+/* =========================
+   ch4
+========================== */
+#ch4 .chapter-visual img {
+  position: absolute;
+  width: 33%;
+  right: 8%;
+  bottom: 0;
+}
+
+#ch4 .sprout {
+  position: absolute;
+  z-index: 1;
+  width: 12%;
+  right: 18%;
+  bottom: 44%;
+}
+
+#ch4 .sprout img {
+  width: 100%;
+  display: block;
+}
+
+/* =========================
+   ch5
+========================== */
+#ch5 .chapter-visual img[alt="roots"] {
+  position: absolute;
+  width: 40%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+#ch5 .chapter-visual img[alt="A flower in full bloom with roots"] {
+  position: absolute;
+  width: 28%;
+  bottom: 42%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* =========================
+   responsive
+========================== */
+@media (max-width: 768px) {
+  .chapter {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .chapter-text {
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+  }
+
+  .chapter-visual {
+    min-height: 320px;
+  }
+
+  /* ch1 seed packet */
+  #ch1 .chapter-visual img[alt="A seed packet"] {
+    position: absolute;
+    width: 55%;
+    right: 4%;
+    top: 8%;
+    transform: rotate(-14deg);
+    transform-origin: top right;
+  }
+
+  #ch1 .chapter-visual img[alt="seeds"] {
+    display: none;
+  }
+
+  /* ch2 & ch3 stacking */
+  #ch2 .ch2-roots,
+  #ch3 .ch3-roots {
+    position: relative;
+    width: 75%;
+    right: auto;
+    bottom: auto;
+    margin: var(--space-md) auto 0;
+  }
+
+  #ch2 .ch2-sprout,
+  #ch3 .ch3-sprout { display: none; }
+
+  #ch2 .drops {
+    position: relative;
+    top: auto;
+    right: auto;
+    justify-content: center;
+    padding: var(--space-md) 0 0;
+  }
+
+  #ch3 .ch3-watering-can {
+    position: relative;
+    width: 45%;
+    top: auto;
+    right: auto;
+    margin: var(--space-md) auto 0;
+    display: block;
+  }
+
+  #ch3 .ch3-drop { display: none; }
+
+  #ch5 .chapter-visual img[alt="roots"],
+  #ch5 .chapter-visual img[alt="A flower in full bloom with roots"] {
+    position: relative;
+    width: 60%;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin: 0 auto;
+    display: block;
+  }
+}
