@@ -158,9 +158,7 @@ body {
   top: 44%;
 }
 
-/* =========================
-   ch2
-========================== */
+/* ch2 */
 #ch2 .ch2-roots,
 #ch2 .ch2-sprout,
 #ch2 .drops {
@@ -187,19 +185,37 @@ body {
 }
 
 #ch2 .drops {
-  display: flex;
-  gap: 2.5%;
-  right: 10%;
-  top: 8%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 #ch2 .drops img {
-  width: 42px;
+  position: absolute;
+  width: 80px; /* larger drops */
 }
 
-#ch2 .drops img:nth-child(1) { margin-top: 0rem; }
-#ch2 .drops img:nth-child(2) { margin-top: 3rem; }
-#ch2 .drops img:nth-child(3) { margin-top: 1rem; }
+/* scattered across sky */
+
+#ch2 .drops img:nth-child(1) {
+  top: 8%;
+  right: 15%;
+}
+
+#ch2 .drops img:nth-child(2) {
+  top: 18%;
+  right: 30%;
+}
+
+#ch2 .drops img:nth-child(3) {
+  top: 10%;
+  right: 45%;
+}
+
+#ch2 .drops img:nth-child(4) {
+  top: 22%;
+  right: 60%;
+}
 
 /* =========================
    ch3
