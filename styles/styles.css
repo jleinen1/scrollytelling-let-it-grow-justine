@@ -393,3 +393,12 @@ body {
     display: block;
   }
 }
+
+/* ch 6*/
+#ch6 .chapter-visual img[alt="roots"] {
+  position: absolute;
+  width: 33%;       /* match previous slides */
+  right: 8%;
+  bottom: 0;
+  z-index: 1;
+}
