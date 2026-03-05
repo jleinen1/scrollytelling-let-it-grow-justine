@@ -274,24 +274,28 @@ body {
 /* =========================
    ch4
 ========================== */
-#ch4 .chapter-visual img {
+#ch4 .ch4-roots,
+#ch4 .ch4-sprout {
   position: absolute;
+  z-index: 1;
+}
+
+#ch4 .ch4-roots {
   width: 33%;
   right: 8%;
   bottom: 0;
 }
 
-#ch4 .sprout {
-  position: absolute;
-  z-index: 1;
+#ch4 .ch4-roots img,
+#ch4 .ch4-sprout img {
+  width: 100%;
+  display: block;
+}
+
+#ch4 .ch4-sprout {
   width: 12%;
   right: 18%;
   bottom: 44%;
-}
-
-#ch4 .sprout img {
-  width: 100%;
-  display: block;
 }
 
 /* =========================
