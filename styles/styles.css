@@ -192,8 +192,10 @@ body {
 
 #ch2 .drops img {
   position: absolute;
-  width: 80px; /* larger drops */
+  width: 8vw;
+  max-width: 140px;
 }
+
 
 /* scattered across sky */
 
