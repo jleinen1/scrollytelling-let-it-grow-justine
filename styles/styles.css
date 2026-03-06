@@ -175,8 +175,8 @@ body {
 /* ch1 */
 .seed-packet {
   position: absolute;
-  width: 80%;
-  left: 20%;
+  width: 40%;
+  left: 10%;
   top: 15%;
   transform: rotate(14deg);
   transform-origin: top left;
@@ -184,8 +184,8 @@ body {
 
 .seeds-scatter {
   position: absolute;
-  width: 18%;
-  left: 28%;
+  width: 9%;
+  left: 14%;
   top: 44%;
 }
 
