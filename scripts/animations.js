@@ -49,28 +49,30 @@ gsap.fromTo("#ch2 .drops img",
     duration: 1,
     ease: "power2.out",
     scrollTrigger: {
-      trigger: "#ch2 .drops",
-      start: "top 75%"
+      trigger: "#ch2",
+      start: "top 70%",
+      toggleActions: "play none none none"
     }
   }
 );
-
 
 // ch 3 watering can tip
 gsap.timeline({
   scrollTrigger: {
     trigger: "#ch3",
-    start: "top center",
+    start: "top 70%",
     end: "bottom center",
     scrub: true
   }
 })
+  
 // phase 1: slide left until over the sprout
 .to(".watering-can", {
   x: -120,
   duration: 0.5,
   ease: "power1.inOut"
 })
+  
 // phase 2: tip in place
 .to(".watering-can", {
   rotation: -40,
@@ -78,25 +80,7 @@ gsap.timeline({
   duration: 0.5,
   ease: "power2.inOut"
 })
-// drop appears and falls as can tips
-.fromTo(".watering-drop", {
-  opacity: 0,
-  y: 0,
-  x: 0
-},
-{
-  opacity: 1,
-  y: 60,
-  x: -110,
-  duration: 0.5,
-  ease: "power1.in"
-}, "<")
-// sprout reveals as drop lands
-.to("#ch3 .base-sprout", {
-  opacity: 1,
-  ease: "none",
-  duration: 0.3
-});
+
 
 // ch 4-night/day theme toggle
 const ch4 = document.querySelector("#ch4");
@@ -156,7 +140,8 @@ gsap.from("#ch5 .base-flower", {
   ease: "back.out(1.7)",
   scrollTrigger: {
     trigger: "#ch5",
-    start: "top 70%"
+    start: "top 70%",
+    toggleActions: "play none none none"
   }
 });
 
@@ -166,7 +151,12 @@ gsap.to("#ch6 .base-flower", {
   duration: 3,
   yoyo: true,
   repeat: -1,
-  ease: "sine.inOut"
+  ease: "sine.inOut",
+  scrollTrigger: {
+    trigger: "#ch6",
+    start: "top 70%",
+    toggleActions: "play none none none"
+  }
 });
 
 
