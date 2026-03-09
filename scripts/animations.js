@@ -144,16 +144,17 @@ gsap.from("#ch5 .base-flower", {
 });
 
 // ch 6
-gsap.to("#ch6 .base-flower", {
-  rotation: 2,
-  duration: 3,
-  yoyo: true,
-  repeat: -1,
-  ease: "sine.inOut",
-  scrollTrigger: {
-    trigger: "#ch6",
-    start: "top 70%",
-    toggleActions: "play none none none"
+ScrollTrigger.create({
+  trigger: "#ch6",
+  start: "top 70%",
+  onEnter: () => {
+    gsap.to("#ch6 .base-flower", {
+      rotation: 5,
+      duration: 3,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut"
+    });
   }
 });
 
