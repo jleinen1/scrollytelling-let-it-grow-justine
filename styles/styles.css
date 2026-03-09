@@ -324,3 +324,25 @@ body {
 
   .watering-drop { display: none; }
 }
+
+/* ch 6 */
+.small-flower {
+  position: absolute;
+  width: 18%;
+  bottom: 42%;
+  z-index: 2;
+}
+
+.small-flower--left  { right: 62%; }
+.small-flower--right { left: 62%; }
+
+/* ch6 sun flowers */
+.sun-flower {
+  position: absolute;
+  width: 22%;
+  bottom: 42%;
+  z-index: 1;
+}
+
+.sun-flower--left  { right: 80%; }
+.sun-flower--right { left: 80%; }
