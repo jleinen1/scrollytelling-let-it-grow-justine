@@ -88,17 +88,10 @@ const ch4 = document.querySelector("#ch4");
 const toggleBtn = document.createElement("button");
 toggleBtn.classList.add("day-night-toggle");
 toggleBtn.innerHTML = `
-  <svg class="icon-sun" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="20" cy="20" r="7" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="20" y1="4" x2="20" y2="9" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="20" y1="31" x2="20" y2="36" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="4" y1="20" x2="9" y2="20" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="31" y1="20" x2="36" y2="20" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="8.5" y1="8.5" x2="12" y2="12" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="28" y1="28" x2="31.5" y2="31.5" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="31.5" y1="8.5" x2="28" y2="12" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="12" y1="28" x2="8.5" y2="31.5" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
-  </svg>
+<svg class="icon-moon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+  <path d="M13 8 C11 12, 10 16, 11 20 C12 26, 17 31, 23 31.5 C27 31.8, 30 30, 31 27 C26 27, 21 24, 18 19 C15 14, 14 11, 13 8 Z"
+    stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
   <svg class="icon-moon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
     <path d="M28 22c-7 1.5-14-4-13-12C9 6 5 11 5 18c0 8 6.5 14 14.5 13.5C26 31 30.5 27 31 22c-1 0-2 0-3 0z"
       stroke="#e8e0f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
