@@ -234,8 +234,6 @@ body {
   right: 2rem;
   width: 52px;
   height: 52px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-accent-warm);
   background: linear-gradient(135deg, var(--color-surface-secondary), var(--color-accent-warm));
   cursor: pointer;
   display: flex;
@@ -244,11 +242,6 @@ body {
   padding: 10px;
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   z-index: 10;
-}
-
-.day-night-toggle:hover {
-  box-shadow: 0 0 16px rgba(211, 238, 255, 0.6), 0 0 8px rgba(243, 214, 208, 0.4);
-  transform: scale(1.05);
 }
 
 .day-night-toggle svg {
@@ -273,7 +266,7 @@ body {
     min-height: 320px;
   }
 
-  /* Shared mobile centering for roots and flowers */
+  /* centering for roots and flowers */
   .base-roots,
   .base-flower {
     position: relative;
