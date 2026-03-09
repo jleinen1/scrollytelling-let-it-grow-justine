@@ -138,7 +138,7 @@ gsap.from("#ch5 .base-flower", {
   }
 });
 
-// ch 6-final garden sway loop
+// ch 6
 gsap.to("#ch6 .base-flower", {
   rotation: 2,
   duration: 3,
