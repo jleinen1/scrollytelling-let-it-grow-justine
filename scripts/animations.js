@@ -81,12 +81,10 @@ gsap.timeline({
   ease: "power2.inOut"
 });
 
-
-// ch 4-night/day theme toggle
+// ch 4 - night/day theme toggle
 const ch4 = document.querySelector("#ch4");
-
 const toggleBtn = document.createElement("button");
-toggleBtn.classList.add("day-night-toggle"); `
+toggleBtn.classList.add("day-night-toggle");
 toggleBtn.innerHTML = `
   <svg class="icon-sun" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="20" cy="20" r="7" stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round"/>
@@ -104,31 +102,30 @@ toggleBtn.innerHTML = `
       stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </svg>
 `;
-`;
 
 ch4.querySelector(".chapter-visual").appendChild(toggleBtn);
 
 let isNight = false;
 
 const dayToNight = gsap.timeline({ paused: true })
-  .to("#ch4", { backgroundColor: "#0a0e2e", duration: 0.8, ease: "power2.inOut" })
-  .to("#ch4 .chapter-heading", { color: "#e8e0f0", duration: 0.5 }, "<")
+  .to("#ch4 .chapter-heading", { color: "#e8e0f0", duration: 0.5 })
   .to("#ch4 .chapter-label", { color: "#9b8ec4", duration: 0.5 }, "<")
   .to(toggleBtn, { backgroundColor: "#1a1740", borderColor: "#9b8ec4", duration: 0.5 }, "<");
 
 toggleBtn.addEventListener("click", () => {
   isNight = !isNight;
-
   const sun = toggleBtn.querySelector(".icon-sun");
   const moon = toggleBtn.querySelector(".icon-moon");
 
   if (isNight) {
     sun.style.display = "none";
     moon.style.display = "block";
+    ch4.classList.add("chapter--dark");
     dayToNight.play();
   } else {
     sun.style.display = "block";
     moon.style.display = "none";
+    ch4.classList.remove("chapter--dark");
     dayToNight.reverse();
   }
 });
