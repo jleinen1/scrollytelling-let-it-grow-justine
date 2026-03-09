@@ -40,17 +40,20 @@ packet.addEventListener("click", () => {
 });
 
 // ch 2 raindrops
-gsap.from("#ch2 .drops img", {
-  y: -200,
-  opacity: 0,
-  stagger: 0.2,
-  duration: 1,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: "#ch2",
-    start: "top 70%"
+gsap.fromTo("#ch2 .drops img",
+  { y: -200, opacity: 0 },
+  {
+    y: 0,
+    opacity: 1,
+    stagger: 0.2,
+    duration: 1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#ch2 .drops",
+      start: "top 75%"
+    }
   }
-});
+);
 
 
 // ch 3 watering can tip
