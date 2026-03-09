@@ -68,7 +68,7 @@ gsap.timeline({
   
 // phase 1: slide left until over the sprout
 .to(".watering-can", {
-  x: -120,
+  x: -110,
   duration: 0.5,
   ease: "power1.inOut"
 })
