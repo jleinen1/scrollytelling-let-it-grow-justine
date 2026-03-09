@@ -44,7 +44,8 @@ gsap.from("#ch2 .drops img", {
   }
 });
 
-// watering can tip
+
+// ch 3 watering can tip
 gsap.timeline({
   scrollTrigger: {
     trigger: "#ch3",
@@ -53,18 +54,39 @@ gsap.timeline({
     scrub: true
   }
 })
+// phase 1: slide left until over the sprout
 .to(".watering-can", {
-  x: -200,
-  rotation: -35,
-  transformOrigin: "bottom right",
+  x: -120,
+  duration: 0.5,
   ease: "power1.inOut"
 })
+// phase 2: tip in place
+.to(".watering-can", {
+  rotation: -40,
+  transformOrigin: "bottom right",
+  duration: 0.5,
+  ease: "power2.inOut"
+})
+// drop appears and falls as can tips
+.fromTo(".watering-drop", {
+  opacity: 0,
+  y: 0,
+  x: 0
+},
+{
+  opacity: 1,
+  y: 60,
+  x: -110,
+  duration: 0.5,
+  ease: "power1.in"
+}, "<")
+// sprout reveals as drop lands
 .to("#ch3 .base-sprout", {
   opacity: 1,
-  ease: "none"
-}, "<");
+  ease: "none",
+  duration: 0.3
+});
 
-// ch 4-night/day theme toggle
 // ch 4-night/day theme toggle
 const ch4 = document.querySelector("#ch4");
 
