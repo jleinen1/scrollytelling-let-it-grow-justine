@@ -44,7 +44,7 @@ gsap.from("#ch2 .drops img", {
   }
 });
 
-// watering can slide
+// watering can tip
 gsap.timeline({
   scrollTrigger: {
     trigger: "#ch3",
@@ -53,17 +53,16 @@ gsap.timeline({
     scrub: true
   }
 })
-
 .to(".watering-can", {
-  x: -200
+  x: -200,
+  rotation: -35,
+  transformOrigin: "bottom right",
+  ease: "power1.inOut"
 })
-
-.from("#ch3 .base-sprout", {
-  scale: 0,
-  transformOrigin: "bottom center",
-  ease: "back.out(1.7)"
+.to("#ch3 .base-sprout", {
+  opacity: 1,
+  ease: "none"
 }, "<");
-
 
 // ch 4-night/day theme toggle
 
