@@ -27,6 +27,7 @@ seedTimeline
     { opacity: 1, y: 80, duration: 0.7, ease: "power2.in" },
     "-=0.3"
   )
+ 
   // seed settles with a small bounce
   .to(seeds, {
     y: 90,
@@ -69,14 +70,14 @@ gsap.timeline({
   
 // phase 1: slide left until over the sprout
 .to(".watering-can", {
-  x: -85,
+  x: -80,
   duration: 0.5,
   ease: "power1.inOut"
 })
   
 // phase 2: tip in place
 .to(".watering-can", {
-  rotation: -35,
+  rotation: -25,
   transformOrigin: "bottom right",
   duration: 0.5,
   ease: "power2.inOut"
