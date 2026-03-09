@@ -149,7 +149,8 @@ ScrollTrigger.create({
   start: "top 70%",
   onEnter: () => {
     gsap.to("#ch6 .base-flower", {
-      rotation: 5,
+      rotation: 6,           // bump up to confirm it's working
+      transformOrigin: "bottom center",  // pivot from base, not center
       duration: 3,
       yoyo: true,
       repeat: -1,
