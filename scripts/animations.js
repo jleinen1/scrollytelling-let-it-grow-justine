@@ -20,6 +20,7 @@ seedTimeline
     duration: 0.6,
     ease: "power2.inOut"
   })
+  
   // seed drops out as bag flips past 90 degrees
   .fromTo(seeds,
     { opacity: 0, y: -10, x: 0 },
@@ -68,14 +69,14 @@ gsap.timeline({
   
 // phase 1: slide left until over the sprout
 .to(".watering-can", {
-  x: -90,
+  x: -85,
   duration: 0.5,
   ease: "power1.inOut"
 })
   
 // phase 2: tip in place
 .to(".watering-can", {
-  rotation: -40,
+  rotation: -35,
   transformOrigin: "bottom right",
   duration: 0.5,
   ease: "power2.inOut"
