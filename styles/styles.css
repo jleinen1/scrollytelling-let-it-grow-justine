@@ -235,19 +235,20 @@ body {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1.5px solid #5C7A8D;
-  background: #F4F8FB;
+  border: 1.5px solid var(--color-accent-warm);
+  background: linear-gradient(135deg, var(--color-surface-secondary), var(--color-accent-warm));
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
   z-index: 10;
 }
 
 .day-night-toggle:hover {
-  box-shadow: 0 0 12px rgba(92, 74, 42, 0.2);
+  box-shadow: 0 0 16px rgba(211, 238, 255, 0.6), 0 0 8px rgba(243, 214, 208, 0.4);
+  transform: scale(1.05);
 }
 
 .day-night-toggle svg {
