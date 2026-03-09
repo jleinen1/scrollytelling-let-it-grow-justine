@@ -1,34 +1,42 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ch 1-seed spill interaction
-
 const packet = document.querySelector(".seed-packet");
 const seeds = document.querySelector(".seeds-scatter");
 
 const seedTimeline = gsap.timeline({ paused: true });
 
 seedTimeline
+  // first: straighten upright from the resting tilt
   .to(packet, {
-    rotation: 40,
-    duration: 0.6,
+    rotation: 0,
+    duration: 0.4,
     ease: "power2.out"
   })
+  // then: flip upside down, pivoting from center
+  .to(packet, {
+    rotation: -160,
+    transformOrigin: "center center",
+    duration: 0.6,
+    ease: "power2.inOut"
+  })
+  // seed drops out as bag flips past 90 degrees
   .fromTo(seeds,
-    {
-      y: -20,
-      opacity: 0
-    },
-    {
-      y: 80,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power2.out"
-    },
-    "-=0.2"
-  );
+    { opacity: 0, y: -10, x: 0 },
+    { opacity: 1, y: 80, duration: 0.7, ease: "power2.in" },
+    "-=0.3"
+  )
+  // seed settles with a small bounce
+  .to(seeds, {
+    y: 90,
+    duration: 0.3,
+    ease: "bounce.out"
+  });
 
 packet.addEventListener("click", () => {
-  seedTimeline.play();
+  if (seedTimeline.progress() === 0 || seedTimeline.progress() === 1) {
+    seedTimeline.restart();
+  }
 });
 
 // ch 2 raindrops
