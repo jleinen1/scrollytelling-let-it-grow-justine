@@ -162,12 +162,13 @@ body {
   z-index: 2;
 }
 
+/* ch5 */
 .base-flower {
   position: absolute;
   width: 56%;
   bottom: 42%;
   left: 50%;
-  transform: translateX(-50%);
+  margin-left: -28%; 
   z-index: 2;
 }
 
