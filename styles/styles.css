@@ -200,20 +200,16 @@ body {
   height: 100%;
   z-index: 1;
 }
-
-/* Root container */
+/* --- SHARED BASE ELEMENTS --- */
+/* These guarantee identical placement across all chapters */
 .base-roots {
   position: absolute;
   width: 66%;
   right: 16%;
-  
-  /* Align bottom to sprout */
-  bottom: 20%;    
-  transform: translateY(0%);
+  bottom: 0;
   z-index: 1;
 }
 
-/* Sprout */
 .base-sprout {
   position: absolute;
   width: 24%;
