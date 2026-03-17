@@ -160,15 +160,27 @@ body {
 .clouds img:nth-child(4) { left: 60%; top: 16%; width: 10vw; }
 .clouds img:nth-child(5) { left: 80%; top: 10%; width: 12vw; }
 
-/* --- SHARED BASE ELEMENTS --- */
+/* ========= BASE PLANT ELEMENTS ========= */
+.chapter-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Root container */
 .base-roots {
   position: absolute;
   width: 66%;
   right: 16%;
-  bottom: 0;
+  
+  /* Align bottom to sprout */
+  bottom: 44%;        /* match sprout start */
+  transform: translateY(50%);
   z-index: 1;
 }
 
+/* Sprout */
 .base-sprout {
   position: absolute;
   width: 24%;
