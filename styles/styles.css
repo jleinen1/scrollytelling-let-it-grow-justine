@@ -160,6 +160,40 @@ body {
 .clouds img:nth-child(4) { left: 60%; top: 16%; width: 10vw; }
 .clouds img:nth-child(5) { left: 80%; top: 10%; width: 12vw; }
 
+/* =========================
+   stars
+========================== */
+.stars {
+  position: absolute;
+  inset: 0;           /* fills the chapter visual */
+  pointer-events: none;
+  z-index: 0;         /* sits above background but below visuals */
+  display: none;      /* hidden by default, only show in night mode */
+}
+
+/* show stars only in night mode */
+.chapter--dark .stars {
+  display: block;
+}
+
+/* individual star positions and sizing */
+.stars img {
+  position: absolute;
+  width: 1.5vw;       /* small stars, responsive size */
+  opacity: 0.8;
+  transform: rotate(0deg);
+  transition: opacity 0.3s ease;
+}
+
+/* scattered positions */
+.stars img:nth-child(1) { top: 10%; left: 8%; width: 1vw; }
+.stars img:nth-child(2) { top: 20%; right: 12%; width: 1.2vw; }
+.stars img:nth-child(3) { top: 5%; right: 28%; width: 1.5vw; }
+.stars img:nth-child(4) { top: 30%; left: 35%; width: 0.8vw; }
+.stars img:nth-child(5) { top: 12%; left: 55%; width: 1vw; }
+.stars img:nth-child(6) { top: 18%; right: 60%; width: 1.1vw; }
+/* add as many as you like, vary top/left/right and size */
+
 /* ========= BASE PLANT ELEMENTS ========= */
 .chapter-visual {
   position: relative;
