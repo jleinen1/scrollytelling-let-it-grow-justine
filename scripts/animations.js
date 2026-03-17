@@ -1,5 +1,34 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// clouds
+
+// slow horizontal drifting
+gsap.utils.toArray(".clouds img").forEach((cloud, i) => {
+  gsap.to(cloud, {
+    x: "+=" + (40 + i * 10),   // each cloud moves slightly different distance
+    duration: 20 + i * 5,      // different speeds = more natural
+    ease: "none",
+    repeat: -1,
+    yoyo: true
+  });
+});
+
+// cloud parallax
+gsap.utils.toArray(".clouds").forEach((cloudGroup) => {
+  const clouds = cloudGroup.querySelectorAll("img");
+
+  gsap.to(clouds, {
+    y: -60, // move slightly upward as you scroll
+    ease: "none",
+    scrollTrigger: {
+      trigger: cloudGroup.closest(".chapter"),
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true
+    }
+  });
+});
+
 // ch 1-seed spill interaction
 const packet = document.querySelector(".seed-packet");
 const seeds = document.querySelector(".seeds-scatter");
