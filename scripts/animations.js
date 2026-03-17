@@ -167,26 +167,29 @@ gsap.from("#ch5 .base-flower", {
   transformOrigin: "bottom center",
   duration: 1.2,
   ease: "back.out(1.7)",
+  opacity: 0,
   scrollTrigger: {
     trigger: "#ch5",
     start: "top 70%",
     toggleActions: "play none none none"
-  }
+  },
+  onStart: () => gsap.set("#ch5 .base-flower", {opacity: 1})
 });
 
 // ch 6
-ScrollTrigger.create({
-  trigger: "#ch6",
-  start: "top 70%",
-  onEnter: () => {
-    gsap.to("#ch6 .base-flower", {
-      rotation: 6,           // bump up to confirm it's working
-      transformOrigin: "bottom center",  // pivot from base, not center
-      duration: 3,
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut"
-    });
+gsap.to("#ch6 .base-flower", {
+  rotation: 6,
+  transformOrigin: "bottom center",
+  duration: 3,
+  ease: "sine.inOut",
+  repeat: -1,
+  yoyo: true,
+  scrollTrigger: {
+    trigger: "#ch6",
+    start: "top 70%",
+    end: "bottom bottom",
+    scrub: false,  // keep true if you want scroll to control rotation
+    toggleActions: "play pause resume pause"
   }
 });
 
