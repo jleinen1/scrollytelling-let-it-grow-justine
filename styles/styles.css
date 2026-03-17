@@ -59,18 +59,24 @@ body {
   inset: 0;
   background: linear-gradient(
     to bottom,
+    #EAF6FF 0%, 
+    #DDF1FF 30%,  
     var(--color-surface-secondary) 55%,
-    var(--color-surface-primary) 55%
+    var(--color-surface-primary) 55%   
   );
   z-index: 0;
 }
 
 .chapter--dark::before {
-  background: linear-gradient(
-    to bottom,
-    var(--color-surface-dark) 55%,
-    var(--color-surface-primary) 55%
-  );
+  background:
+    radial-gradient(circle at 70% 20%, rgba(255,255,255,0.06), transparent 40%),
+    linear-gradient(
+      to bottom,
+      #1B2A33 0%,
+      #223843 30%,
+      var(--color-surface-dark) 55%,
+      var(--color-surface-primary) 55%
+    );
 }
 
 /* left side text */
