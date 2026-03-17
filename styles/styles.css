@@ -131,38 +131,34 @@ body {
 }
 
 /* =========================
-   clouds
+   clouds (full sky layer)
 ========================== */
 .clouds {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0; /* sits above gradient, below visuals */
+  z-index: 1;
+}
+
+/* keep content ABOVE clouds */
+.chapter-text,
+.chapter-visual {
+  position: relative;
+  z-index: 2;
 }
 
 .clouds img {
   position: absolute;
-  opacity: 0.9;
-}
-
-.clouds img:nth-child(1) {
-  top: 6%;
-  left: 8%;
-  width: 12vw;
-}
-
-.clouds img:nth-child(2) {
-  top: 16%;
-  right: 10%;
+  top: 5%;
   width: 10vw;
+  opacity: 0.85;
 }
 
-.clouds img:nth-child(3) {
-  top: 4%;
-  right: 28%;
-  width: 15vw;
-  opacity: 0.75;
-}
+.clouds img:nth-child(1) { left: 5%;  top: 8%;  width: 11vw; }
+.clouds img:nth-child(2) { left: 22%; top: 14%; width: 9vw; }
+.clouds img:nth-child(3) { left: 40%; top: 6%;  width: 13vw; }
+.clouds img:nth-child(4) { left: 60%; top: 16%; width: 10vw; }
+.clouds img:nth-child(5) { left: 80%; top: 10%; width: 12vw; }
 
 /* --- SHARED BASE ELEMENTS --- */
 .base-roots {
