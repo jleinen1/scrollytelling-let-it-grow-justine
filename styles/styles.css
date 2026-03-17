@@ -175,7 +175,7 @@ body {
   right: 16%;
   
   /* Align bottom to sprout */
-  bottom: 44%;        /* match sprout start */
+  bottom: 50%;    
   transform: translateY(50%);
   z-index: 1;
 }
