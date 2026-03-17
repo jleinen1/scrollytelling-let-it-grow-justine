@@ -140,7 +140,6 @@ body {
   z-index: 1;
 }
 
-/* keep content ABOVE clouds */
 .chapter-text,
 .chapter-visual {
   position: relative;
@@ -209,8 +208,8 @@ body {
   right: 16%;
   
   /* Align bottom to sprout */
-  bottom: 50%;    
-  transform: translateY(50%);
+  bottom: 20%;    
+  transform: translateY(0%);
   z-index: 1;
 }
 
