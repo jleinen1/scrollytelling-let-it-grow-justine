@@ -1,29 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
 
-/* tokens */
-:root {
-  --color-surface-primary: #E8E1D9;
-  --color-surface-secondary: #D3EEFF;
-  --color-surface-dark: #243743;
-  --color-text-primary: #3A2F2A;
-  --color-text-inverse: #E8F3ED;
-  --color-text-accent: #2F4F3A;
-  --color-accent-warm: #F3D6D0;
-  --color-accent-gold: #DEC978;
-  --font-heading: "DM Serif Display", serif;
-  --font-body: "IBM Plex Sans", sans-serif;
-  --text-h1: clamp(3rem, 6vw, 4rem);
-  --text-h2: clamp(2rem, 4vw, 2.5rem);
-  --text-h3: 1.375rem;
-  --text-body: 1.125rem;
-  --text-label: 2.5rem;
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 4rem;
-  --space-xl: 6rem;
-  --transition-default: 200ms ease;
-}
 
 /* reset */
 *, *::before, *::after {
