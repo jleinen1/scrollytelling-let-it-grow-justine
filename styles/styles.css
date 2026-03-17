@@ -201,12 +201,12 @@ body {
   z-index: 1;
 }
 /* --- SHARED BASE ELEMENTS --- */
-/* These guarantee identical placement across all chapters */
+
 .base-roots {
   position: absolute;
   width: 66%;
   right: 16%;
-  bottom: 0;
+  bottom: 3%;
   z-index: 1;
 }
 
@@ -337,8 +337,6 @@ body {
   
   /* Mobile specific overrides */
   .base-roots { width: 75%; }
-
-  .base-sprout { display: none; }
 
   /* ch1 */
   .seed-packet {
