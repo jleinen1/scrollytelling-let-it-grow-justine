@@ -55,6 +55,10 @@ body {
     );
 }
 
+.chapter--dark .clouds {
+  display: none;
+}
+
 /* left side text */
 .chapter-text {
   position: relative;
@@ -126,8 +130,41 @@ body {
   object-fit: contain;
 }
 
+/* =========================
+   clouds
+========================== */
+.clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* sits above gradient, below visuals */
+}
+
+.clouds img {
+  position: absolute;
+  opacity: 0.9;
+}
+
+.clouds img:nth-child(1) {
+  top: 6%;
+  left: 8%;
+  width: 12vw;
+}
+
+.clouds img:nth-child(2) {
+  top: 16%;
+  right: 10%;
+  width: 10vw;
+}
+
+.clouds img:nth-child(3) {
+  top: 4%;
+  right: 28%;
+  width: 15vw;
+  opacity: 0.75;
+}
+
 /* --- SHARED BASE ELEMENTS --- */
-/* These guarantee identical placement across all chapters */
 .base-roots {
   position: absolute;
   width: 66%;
