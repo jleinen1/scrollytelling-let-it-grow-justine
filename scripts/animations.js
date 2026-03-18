@@ -1,9 +1,12 @@
 gsap.registerPlugin(ScrollTrigger);
- 
+
+history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+
 // ─── reduced-motion check ─────────────────────────────────────────────────────
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
- 
- 
+
+// ─── hero entrance ───────────────────────────────────────────────────────────
 if (prefersReduced) {
   gsap.set([
     ".hero-eyebrow",
@@ -15,23 +18,23 @@ if (prefersReduced) {
   ], { opacity: 1, y: 0, rotation: 10 });
 } else {
   const heroEntrance = gsap.timeline({ defaults: { ease: "power3.out" } });
- 
-  // Step 1: eyebrow
+
+  // Step 1
   heroEntrance.fromTo(
     ".hero-eyebrow",
     { opacity: 0, y: 14 },
     { opacity: 0.45, y: 0, duration: 0.5 }
   );
- 
-  // Step 2: title lines clip-reveal upward, staggered
+
+  // Step 2
   heroEntrance.fromTo(
     ".hero-title-line",
     { y: "105%", opacity: 0 },
     { y: "0%", opacity: 1, duration: 0.7, stagger: 0.15 },
     "-=0.15"
   );
- 
-  // Step 3: subtitle then CTA
+
+  // Step 3
   heroEntrance.fromTo(
     ".hero-subtitle",
     { opacity: 0, y: 12 },
@@ -44,24 +47,24 @@ if (prefersReduced) {
     { opacity: 0.6, y: 0, duration: 0.45 },
     "-=0.25"
   );
- 
-  // Seed packet drifts in from slight offset
+
+  // Seed packet drifts in
   heroEntrance.fromTo(
     ".hero-seed-packet",
     { opacity: 0, y: -20, rotation: 4 },
     { opacity: 1, y: 0, rotation: 10, duration: 0.8, ease: "power2.out" },
     0.3   // starts early, runs in parallel with text
   );
- 
-  // Sprout rises up from below
+
+  // Sprout rises
   heroEntrance.fromTo(
     ".hero-sprout",
     { opacity: 0, y: 30, scale: 0.85, transformOrigin: "bottom center" },
     { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "back.out(1.4)" },
     0.6
   );
- 
-  // Gentle idle bob on the seed packet after entrance settles
+
+  // idle bob
   heroEntrance.to(
     ".hero-seed-packet",
     {
@@ -74,10 +77,10 @@ if (prefersReduced) {
     "+=0.3"
   );
 }
- 
+
 // ─── clouds ───────────────────────────────────────────────────────────────────
- 
-// slow horizontal drifting — skip if reduced-motion
+
+// slow horizontal drifting
 if (!prefersReduced) {
   gsap.utils.toArray(".clouds img").forEach((cloud, i) => {
     gsap.to(cloud, {
@@ -89,11 +92,11 @@ if (!prefersReduced) {
     });
   });
 }
- 
+
 // cloud parallax — always runs but is instant/no-op in reduced mode
 gsap.utils.toArray(".clouds").forEach((cloudGroup) => {
   const clouds = cloudGroup.querySelectorAll("img");
- 
+
   gsap.to(clouds, {
     y: prefersReduced ? 0 : -60,
     ease: "none",
@@ -105,18 +108,18 @@ gsap.utils.toArray(".clouds").forEach((cloudGroup) => {
     }
   });
 });
- 
+
 // ─── ch1 — hero sequence ──────────────────────────────────────────────────────
 // Two clearly tweened steps:
 //   Step 1 (entrance): chapter-label fades + slides up, then heading lines
 //          stagger in one by one.
 //   Step 2 (readiness cue): seed-packet does a gentle idle bob so users
 //          understand it's interactive.
- 
+
 const ch1Text  = document.querySelector("#ch1 .chapter-text");
 const ch1Label = document.querySelector("#ch1 .chapter-label");
 const ch1Lines = document.querySelectorAll("#ch1 .chapter-heading br, #ch1 .chapter-heading");
- 
+
 if (prefersReduced) {
   // Reduced-motion fallback: everything visible immediately, no motion
   gsap.set(["#ch1 .chapter-label", "#ch1 .chapter-heading", ".seed-packet"], {
@@ -129,7 +132,7 @@ if (prefersReduced) {
   // Wrap each line of the heading in a span so we can stagger them
   const heading = document.querySelector("#ch1 .chapter-heading");
   const rawHTML = heading.innerHTML;
- 
+
   // Split on <br> to get individual lines, wrap each in a tween-able span
   const lines = rawHTML.split(/<br\s*\/?>/i);
   heading.innerHTML = lines
@@ -137,16 +140,16 @@ if (prefersReduced) {
                  <span class="hero-line-inner" style="display:block;">${l}</span>
                </span>`)
     .join("");
- 
+
   const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
- 
+
   // Step 1a — label slides up and fades in
   heroTimeline.fromTo(
     "#ch1 .chapter-label",
     { opacity: 0, y: 18 },
     { opacity: 0.5, y: 0, duration: 0.55 }
   );
- 
+
   // Step 1b — heading lines stagger in (each line inner slides up from its clip)
   heroTimeline.fromTo(
     "#ch1 .hero-line-inner",
@@ -154,7 +157,7 @@ if (prefersReduced) {
     { y: "0%", opacity: 1, duration: 0.65, stagger: 0.12 },
     "-=0.2"   // overlap slightly with label finishing
   );
- 
+
   // ── Step 2: seed-packet idle bob (readiness cue) ──────────────────────────
   // Starts after the text lands; a gentle up-down pulse on the packet
   heroTimeline.to(
@@ -170,13 +173,13 @@ if (prefersReduced) {
     "+=0.4"   // brief pause after text before bob starts
   );
 }
- 
+
 // ─── ch1 — seed spill interaction ────────────────────────────────────────────
 const packet = document.querySelector(".seed-packet");
 const seeds  = document.querySelector(".seeds-scatter");
- 
+
 const seedTimeline = gsap.timeline({ paused: true });
- 
+
 if (prefersReduced) {
   // Reduced-motion: instant reveal of seeds, no flip
   seedTimeline
@@ -210,13 +213,13 @@ if (prefersReduced) {
       ease: "bounce.out"
     });
 }
- 
+
 packet.addEventListener("click", () => {
   if (seedTimeline.progress() === 0 || seedTimeline.progress() === 1) {
     seedTimeline.restart();
   }
 });
- 
+
 // ─── ch2 — raindrops ─────────────────────────────────────────────────────────
 gsap.fromTo(
   "#ch2 .drops img",
@@ -234,7 +237,7 @@ gsap.fromTo(
     }
   }
 );
- 
+
 // ─── ch3 — watering can tip ───────────────────────────────────────────────────
 gsap.timeline({
   scrollTrigger: {
@@ -259,7 +262,7 @@ gsap.timeline({
     duration: 0.5,
     ease: "power2.inOut"
   });
- 
+
 // ─── ch4 — day / night toggle ─────────────────────────────────────────────────
 const ch4      = document.querySelector("#ch4");
 const toggleBtn = document.createElement("button");
@@ -283,13 +286,13 @@ toggleBtn.innerHTML = `
       stroke="#5c4a2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </svg>
 `;
- 
+
 ch4.querySelector(".chapter-text").appendChild(toggleBtn);
- 
+
 let isNight = false;
- 
+
 const transitionDuration = prefersReduced ? 0 : 0.5;
- 
+
 // fromTo so .reverse() always snaps back to the explicit day colours,
 // never a stale GSAP state from a previous toggle.
 const dayToNight = gsap.timeline({ paused: true })
@@ -305,12 +308,12 @@ const dayToNight = gsap.timeline({ paused: true })
     { backgroundColor: "#f3d6d0", borderColor: "transparent" },
     { backgroundColor: "#1a1740", borderColor: "#9b8ec4", duration: transitionDuration }, "<"
   );
- 
+
 toggleBtn.addEventListener("click", () => {
   isNight = !isNight;
   const sun  = toggleBtn.querySelector(".icon-sun");
   const moon = toggleBtn.querySelector(".icon-moon");
- 
+
   if (isNight) {
     sun.style.display  = "none";
     moon.style.display = "block";
@@ -323,7 +326,7 @@ toggleBtn.addEventListener("click", () => {
     dayToNight.reverse();
   }
 });
- 
+
 // ─── ch5 — flower bloom ───────────────────────────────────────────────────────
 gsap.from("#ch5 .base-flower", {
   scale:           prefersReduced ? 1 : 0,
@@ -338,7 +341,7 @@ gsap.from("#ch5 .base-flower", {
   },
   onStart: () => gsap.set("#ch5 .base-flower", { opacity: 1 })
 });
- 
+
 // ─── ch6 — idle sway ──────────────────────────────────────────────────────────
 if (!prefersReduced) {
   gsap.to("#ch6 .base-flower", {
