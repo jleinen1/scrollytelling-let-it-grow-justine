@@ -12,6 +12,15 @@
 
   <link rel="stylesheet" href="styles/variables.css">
   <link rel="stylesheet" href="styles/styles.css">
+
+  <!-- Force page to start at top before anything renders -->
+  <script>
+    history.scrollRestoration = "manual";
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname);
+    }
+    window.scrollTo(0, 0);
+  </script>
 </head>
 
 <body>
