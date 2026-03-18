@@ -79,10 +79,10 @@ body {
  
 .hero-title-line {
   display: block;
-  overflow: hidden; 
+  overflow: hidden;   /* clips the slide-up entrance */
 }
  
-/* "Grow." */
+/* "Grow." gets the accent colour */
 .hero-title-line--accent {
   color: var(--color-text-accent);
   font-style: italic;
@@ -99,7 +99,7 @@ body {
   margin-top: var(--space-xs);
 }
  
-/* scroll-down link */
+/* CTA scroll-down link */
 .hero-cta {
   display: inline-flex;
   align-items: center;
@@ -290,11 +290,12 @@ body {
 ========================== */
 .hero-line {
   display: block;
-  overflow: hidden;  
+  overflow: hidden;   /* clips the sliding inner span */
 }
  
 .hero-line-inner {
   display: block;
+  /* GSAP animates transform/opacity on this element */
 }
  
 /* =========================
@@ -361,18 +362,16 @@ body {
  
 .stars img {
   position: absolute;
-  width: 1.5vw;
+  width: 2vw;
   opacity: 0.8;
   transform: rotate(0deg);
   transition: opacity 0.3s ease;
 }
  
-.stars img:nth-child(1) { top: 10%; left: 8%;   width: 1vw; }
-.stars img:nth-child(2) { top: 20%; right: 12%;  width: 1.2vw; }
-.stars img:nth-child(3) { top: 5%;  right: 28%;  width: 1.5vw; }
-.stars img:nth-child(4) { top: 30%; left: 35%;   width: 0.8vw; }
-.stars img:nth-child(5) { top: 12%; left: 55%;   width: 1vw; }
-.stars img:nth-child(6) { top: 18%; right: 60%;  width: 1.1vw; }
+.stars img:nth-child(1) { top: 10%; left: 8%;   width: 1.6vw; }
+.stars img:nth-child(2) { top: 20%; right: 12%;  width: 2vw;   }
+.stars img:nth-child(3) { top: 5%;  right: 28%;  width: 2.4vw; }
+.stars img:nth-child(4) { top: 28%; left: 62%;   width: 1.8vw; }
  
 /* ========= BASE PLANT ELEMENTS ========= */
 .chapter-visual {
@@ -465,9 +464,7 @@ body {
  
 /* ch4 */
 .day-night-toggle {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
+  position: relative;
   width: 52px;
   height: 52px;
   background: linear-gradient(135deg, var(--color-surface-secondary), var(--color-accent-warm));
@@ -476,8 +473,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 10px;
+  margin-top: var(--space-md);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
-  z-index: 10;
+  border: none;
 }
  
 .day-night-toggle svg {
