@@ -1,22 +1,194 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
-
-
+ 
+ 
 /* reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
+ 
 html { scroll-behavior: smooth; }
-
+ 
 body {
   font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-text-primary);
   background-color: var(--color-surface-primary);
 }
-
+ 
+/* =========================
+   hero section
+========================== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+ 
+/* same sky/soil split as chapters */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #EAF6FF 0%,
+    #DDF1FF 30%,
+    var(--color-surface-secondary) 55%,
+    var(--color-surface-primary)   55%
+  );
+  z-index: 0;
+}
+ 
+.hero .clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+ 
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-lg);
+  gap: var(--space-sm);
+}
+ 
+.hero-eyebrow {
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-style: italic;
+  color: var(--color-text-primary);
+  opacity: 0.45;
+}
+ 
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+}
+ 
+.hero-title-line {
+  display: block;
+  overflow: hidden;   /* clips the slide-up entrance */
+}
+ 
+/* "Grow." gets the accent colour */
+.hero-title-line--accent {
+  color: var(--color-text-accent);
+  font-style: italic;
+}
+ 
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 300;
+  color: var(--color-text-primary);
+  opacity: 0.65;
+  max-width: 32ch;
+  line-height: 1.6;
+  margin-top: var(--space-xs);
+}
+ 
+/* CTA scroll-down link */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: var(--space-md);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: var(--text-h3);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  width: fit-content;
+}
+ 
+.hero-cta svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+ 
+.hero-cta:hover {
+  opacity: 1;
+}
+ 
+/* right-side visual */
+.hero-visual {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+ 
+.hero-roots {
+  position: absolute;
+  width: 66%;
+  right: 16%;
+  bottom: 3%;
+  z-index: 1;
+}
+ 
+.hero-sprout {
+  position: absolute;
+  width: 24%;
+  right: 36%;
+  bottom: 44%;
+  z-index: 2;
+}
+ 
+.hero-seed-packet {
+  position: absolute;
+  width: 38%;
+  left: 10%;
+  top: 18%;
+  transform: rotate(10deg);
+  transform-origin: top left;
+  z-index: 3;
+}
+ 
+/* hero responsive */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+ 
+  .hero-content {
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+  }
+ 
+  .hero-visual {
+    min-height: 280px;
+  }
+ 
+  .hero-seed-packet {
+    width: 50%;
+    right: 4%;
+    left: auto;
+    top: 8%;
+    transform: rotate(-10deg);
+    transform-origin: top right;
+  }
+ 
+  .hero-roots {
+    width: 80%;
+    right: 10%;
+  }
+}
+ 
 /* =========================
    chapter frames layout
 ========================== */
@@ -27,7 +199,7 @@ body {
   position: relative;
   overflow: hidden;
 }
-
+ 
 /* sky/soil horizon split at 55% */
 .chapter::before {
   content: '';
@@ -42,7 +214,7 @@ body {
   );
   z-index: 0;
 }
-
+ 
 .chapter--dark::before {
   background:
     radial-gradient(circle at 70% 20%, rgba(255,255,255,0.06), transparent 40%),
@@ -54,11 +226,11 @@ body {
       var(--color-surface-primary) 55%
     );
 }
-
+ 
 .chapter--dark .clouds {
   display: none;
 }
-
+ 
 /* left side text */
 .chapter-text {
   position: relative;
@@ -69,7 +241,7 @@ body {
   padding: var(--space-xl) var(--space-lg);
   gap: var(--space-sm);
 }
-
+ 
 .chapter-label {
   font-family: var(--font-heading);
   font-size: var(--text-h3);
@@ -77,24 +249,24 @@ body {
   opacity: 0.5;
   font-style: italic;
 }
-
+ 
 .chapter-heading {
   font-family: var(--font-heading);
   font-size: var(--text-h2);
   line-height: 1.15;
   color: var(--color-text-primary);
 }
-
+ 
 .chapter-heading em {
   font-style: italic;
   color: var(--color-text-accent);
 }
-
+ 
 .chapter--dark .chapter-label,
 .chapter--dark .chapter-heading {
   color: var(--color-text-inverse);
 }
-
+ 
 .chapter-body {
   font-family: var(--font-body);
   font-size: var(--text-body);
@@ -103,7 +275,7 @@ body {
   color: var(--color-text-primary);
   max-width: 36ch;
 }
-
+ 
 .chapter-note {
   font-size: 0.8rem;
   color: var(--color-text-primary);
@@ -111,7 +283,21 @@ body {
   font-style: italic;
   margin-top: var(--space-xs);
 }
-
+ 
+/* =========================
+   hero line split animation
+   (ch1 heading line-by-line)
+========================== */
+.hero-line {
+  display: block;
+  overflow: hidden;   /* clips the sliding inner span */
+}
+ 
+.hero-line-inner {
+  display: block;
+  /* GSAP animates transform/opacity on this element */
+}
+ 
 /* =========================
    visual constraints
 ========================== */
@@ -124,12 +310,12 @@ body {
   width: 100%;
   height: 100%;
 }
-
+ 
 .chapter-visual img {
   max-width: 100%;
   object-fit: contain;
 }
-
+ 
 /* =========================
    clouds (full sky layer)
 ========================== */
@@ -139,60 +325,56 @@ body {
   pointer-events: none;
   z-index: 1;
 }
-
+ 
 .chapter-text,
 .chapter-visual {
   position: relative;
   z-index: 2;
 }
-
+ 
 .clouds img {
   position: absolute;
   top: 5%;
   width: 10vw;
   opacity: 0.85;
 }
-
+ 
 .clouds img:nth-child(1) { left: 5%;  top: 8%;  width: 11vw; }
 .clouds img:nth-child(2) { left: 22%; top: 14%; width: 9vw; }
 .clouds img:nth-child(3) { left: 40%; top: 6%;  width: 13vw; }
 .clouds img:nth-child(4) { left: 60%; top: 16%; width: 10vw; }
 .clouds img:nth-child(5) { left: 80%; top: 10%; width: 12vw; }
-
+ 
 /* =========================
    stars
 ========================== */
 .stars {
   position: absolute;
-  inset: 0;           /* fills the chapter visual */
+  inset: 0;
   pointer-events: none;
-  z-index: 0;         /* sits above background but below visuals */
-  display: none;      /* hidden by default, only show in night mode */
+  z-index: 0;
+  display: none;
 }
-
-/* show stars only in night mode */
+ 
 .chapter--dark .stars {
   display: block;
 }
-
-/* individual star positions and sizing */
+ 
 .stars img {
   position: absolute;
-  width: 1.5vw;       /* small stars, responsive size */
+  width: 1.5vw;
   opacity: 0.8;
   transform: rotate(0deg);
   transition: opacity 0.3s ease;
 }
-
-/* scattered positions */
-.stars img:nth-child(1) { top: 10%; left: 8%; width: 1vw; }
-.stars img:nth-child(2) { top: 20%; right: 12%; width: 1.2vw; }
-.stars img:nth-child(3) { top: 5%; right: 28%; width: 1.5vw; }
-.stars img:nth-child(4) { top: 30%; left: 35%; width: 0.8vw; }
-.stars img:nth-child(5) { top: 12%; left: 55%; width: 1vw; }
-.stars img:nth-child(6) { top: 18%; right: 60%; width: 1.1vw; }
-/* add as many as you like, vary top/left/right and size */
-
+ 
+.stars img:nth-child(1) { top: 10%; left: 8%;   width: 1vw; }
+.stars img:nth-child(2) { top: 20%; right: 12%;  width: 1.2vw; }
+.stars img:nth-child(3) { top: 5%;  right: 28%;  width: 1.5vw; }
+.stars img:nth-child(4) { top: 30%; left: 35%;   width: 0.8vw; }
+.stars img:nth-child(5) { top: 12%; left: 55%;   width: 1vw; }
+.stars img:nth-child(6) { top: 18%; right: 60%;  width: 1.1vw; }
+ 
 /* ========= BASE PLANT ELEMENTS ========= */
 .chapter-visual {
   position: relative;
@@ -200,8 +382,7 @@ body {
   height: 100%;
   z-index: 1;
 }
-/* --- SHARED BASE ELEMENTS --- */
-
+ 
 .base-roots {
   position: absolute;
   width: 66%;
@@ -209,7 +390,7 @@ body {
   bottom: 3%;
   z-index: 1;
 }
-
+ 
 .base-sprout {
   position: absolute;
   width: 24%;
@@ -217,7 +398,7 @@ body {
   bottom: 44%;
   z-index: 2;
 }
-
+ 
 /* ch5 */
 .base-flower {
   position: absolute;
@@ -227,7 +408,7 @@ body {
   margin-left: -28%; 
   z-index: 2;
 }
-
+ 
 /* --- CHAPTER SPECIFIC ASSETS --- */
 /* ch1 */
 .seed-packet {
@@ -239,14 +420,14 @@ body {
   transform-origin: top left;
   cursor: pointer;
 }
-
+ 
 .seeds-scatter {
   position: absolute;
   width: 9%;
   left: 14%;
   top: 44%;
 }
-
+ 
 /* ch2 drops */
 .drops {
   position: absolute;
@@ -254,18 +435,18 @@ body {
   pointer-events: none;
   z-index: 3;
 }
-
+ 
 .drops img {
   position: absolute;
   width: 8vw;
   max-width: 140px;
 }
-
-.drops img:nth-child(1) { top: 5%; right: 20%; }
+ 
+.drops img:nth-child(1) { top: 5%;  right: 20%; }
 .drops img:nth-child(2) { top: 15%; right: 60%; }
-.drops img:nth-child(3) { top: 8%; right: 100%; }
+.drops img:nth-child(3) { top: 8%;  right: 100%; }
 .drops img:nth-child(4) { top: 18%; right: 140%; }
-
+ 
 /* ch3 */
 .watering-can {
   position: absolute;
@@ -274,7 +455,7 @@ body {
   top: 10%;
   z-index: 3;
 }
-
+ 
 .watering-drop {
   position: absolute;
   width: 8%;
@@ -282,8 +463,8 @@ body {
   top: 32%;
   z-index: 2;
 }
-
-/* ch 4 */
+ 
+/* ch4 */
 .day-night-toggle {
   position: absolute;
   bottom: 2rem;
@@ -299,12 +480,12 @@ body {
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   z-index: 10;
 }
-
+ 
 .day-night-toggle svg {
   width: 100%;
   height: 100%;
 }
-
+ 
 /* =========================
    responsive
 ========================== */
@@ -313,16 +494,15 @@ body {
     grid-template-columns: 1fr;
     min-height: auto;
   }
-
+ 
   .chapter-text {
     padding: var(--space-lg) var(--space-md) var(--space-md);
   }
-
+ 
   .chapter-visual {
     min-height: 320px;
   }
-
-  /* centering for roots and flowers */
+ 
   .base-roots,
   .base-flower {
     position: relative;
@@ -335,9 +515,8 @@ body {
     display: block;
   }
   
-  /* Mobile specific overrides */
   .base-roots { width: 75%; }
-
+ 
   /* ch1 */
   .seed-packet {
     position: absolute;
@@ -348,9 +527,9 @@ body {
     transform: rotate(-14deg);
     transform-origin: top right;
   }
-
+ 
   .seeds-scatter { display: none; }
-
+ 
   /* ch2 */
   .drops {
     position: relative;
@@ -359,7 +538,7 @@ body {
     justify-content: center;
     padding: var(--space-md) 0 0;
   }
-
+ 
   /* ch3 */
   .watering-can {
     position: relative;
@@ -369,28 +548,129 @@ body {
     margin: var(--space-md) auto 0;
     display: block;
   }
-
+ 
   .watering-drop { display: none; }
 }
-
-/* ch 6 */
+ 
+/* ch6 */
 .small-flower {
   position: absolute;
   width: 18%;
   bottom: 42%;
   z-index: 2;
 }
-
+ 
 .small-flower--left  { right: 62%; }
 .small-flower--right { left: 62%; }
-
-/* ch6 sun flowers */
+ 
 .sun-flower {
   position: absolute;
   width: 22%;
   bottom: 42%;
   z-index: 1;
 }
-
+ 
 .sun-flower--left  { right: 80%; }
 .sun-flower--right { left: 80%; }
+ 
+/* =========================
+   CSS reduced-motion fallback
+   — covers everything GSAP
+     would otherwise animate
+========================== */
+@media (prefers-reduced-motion: reduce) {
+ 
+  /* Disable smooth scroll */
+  html { scroll-behavior: auto; }
+ 
+  /* Hero: everything visible immediately */
+  .hero-eyebrow,
+  .hero-title-line,
+  .hero-subtitle,
+  .hero-cta {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+ 
+  .hero-seed-packet {
+    opacity: 1 !important;
+    transform: rotate(10deg) !important;
+    animation: none !important;
+  }
+ 
+  .hero-sprout {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+ 
+  .hero-cta {
+    transition: none !important;
+  }
+ 
+  /* Ensure hero text is always visible (GSAP won't run its entrance) */
+  #ch1 .chapter-label,
+  #ch1 .chapter-heading,
+  #ch1 .hero-line-inner {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+ 
+  /* Seed packet: keep its design tilt, no bob */
+  .seed-packet {
+    animation: none !important;
+    transform: rotate(14deg) !important;
+  }
+ 
+  /* Seeds: visible immediately */
+  .seeds-scatter {
+    opacity: 1 !important;
+    transform: translateY(80px) !important;
+  }
+ 
+  /* Ch2 raindrops: visible immediately */
+  #ch2 .drops img {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+ 
+  /* Ch3 watering can: show in tipped state */
+  .watering-can {
+    transform: translateX(-60px) rotate(-25deg) !important;
+    transform-origin: bottom right !important;
+  }
+ 
+  /* Ch4 toggle: disable GSAP colour transitions
+     (the toggle still works — just snaps instantly) */
+  .day-night-toggle {
+    transition: none !important;
+  }
+ 
+  /* Ch5 flower: always fully visible */
+  #ch5 .base-flower {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+ 
+  /* Ch6 sway: no rotation */
+  #ch6 .base-flower {
+    animation: none !important;
+    transform: none !important;
+  }
+ 
+  /* Cloud drift/parallax: lock in place */
+  .clouds img {
+    animation: none !important;
+    transform: none !important;
+  }
+ 
+  /* Kill any residual CSS transitions site-wide */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+ 
