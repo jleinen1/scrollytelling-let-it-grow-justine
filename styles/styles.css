@@ -79,10 +79,10 @@ body {
  
 .hero-title-line {
   display: block;
-  overflow: hidden;   /* clips the slide-up entrance */
+  overflow: hidden; 
 }
  
-/* "Grow." gets the accent colour */
+/* "Grow." */
 .hero-title-line--accent {
   color: var(--color-text-accent);
   font-style: italic;
@@ -99,7 +99,7 @@ body {
   margin-top: var(--space-xs);
 }
  
-/* CTA scroll-down link */
+/* scroll-down link */
 .hero-cta {
   display: inline-flex;
   align-items: center;
@@ -290,12 +290,11 @@ body {
 ========================== */
 .hero-line {
   display: block;
-  overflow: hidden;   /* clips the sliding inner span */
+  overflow: hidden;  
 }
  
 .hero-line-inner {
   display: block;
-  /* GSAP animates transform/opacity on this element */
 }
  
 /* =========================
@@ -387,7 +386,7 @@ body {
   position: absolute;
   width: 66%;
   right: 16%;
-  bottom: 3%;
+  bottom: 8%;
   z-index: 1;
 }
  
