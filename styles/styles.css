@@ -286,7 +286,6 @@ body {
  
 /* =========================
    hero line split animation
-   (ch1 heading line-by-line)
 ========================== */
 .hero-line {
   display: block;
@@ -385,7 +384,7 @@ body {
   position: absolute;
   width: 66%;
   right: 16%;
-  bottom: 4%;
+  bottom: 3%;
   z-index: 1;
 }
  
