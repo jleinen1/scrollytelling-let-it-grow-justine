@@ -16,9 +16,9 @@ if (!prefersReduced) {
   smoother = ScrollSmoother.create({
     wrapper:  "#smooth-wrapper",
     content:  "#smooth-content",
-    smooth:   1.4, 
-    effects:  true,  
-    normalizeScroll: true   
+    smooth:   1.4,          // tuned for readability — not too floaty
+    effects:  true,         // enables data-speed / data-lag attributes
+    normalizeScroll: true   // consistent feel across devices
   });
 }
 
@@ -54,6 +54,10 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () 
 });
 
 // ─── hero entrance ───────────────────────────────────────────────────────────
+// Three tweened steps:
+//   Step 1 — eyebrow fades in
+//   Step 2 — title lines slide up one by one (clip reveal)
+//   Step 3 — subtitle + CTA fade up together
 
 if (prefersReduced) {
   gsap.set([
@@ -67,14 +71,14 @@ if (prefersReduced) {
 } else {
   const heroEntrance = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-  // Step 1
+  // Step 1: eyebrow
   heroEntrance.fromTo(
     ".hero-eyebrow",
     { opacity: 0, y: 14 },
     { opacity: 0.45, y: 0, duration: 0.5 }
   );
 
-  // Step 2
+  // Step 2: title lines clip-reveal upward, staggered
   heroEntrance.fromTo(
     ".hero-title-line",
     { y: "105%", opacity: 0 },
@@ -82,7 +86,7 @@ if (prefersReduced) {
     "-=0.15"
   );
 
-  // Step 3
+  // Step 3: subtitle then CTA
   heroEntrance.fromTo(
     ".hero-subtitle",
     { opacity: 0, y: 12 },
@@ -112,7 +116,7 @@ if (prefersReduced) {
     0.6
   );
 
-  // Gentle idle bob
+  // Gentle idle bob on the seed packet after entrance settles
   heroEntrance.to(
     ".hero-seed-packet",
     {
@@ -128,7 +132,7 @@ if (prefersReduced) {
 
 // ─── clouds ───────────────────────────────────────────────────────────────────
 
-// slow horizontal drifting, skip if reduced-motion
+// slow horizontal drifting — skip if reduced-motion
 if (!prefersReduced) {
   gsap.utils.toArray(".clouds img").forEach((cloud, i) => {
     gsap.to(cloud, {
@@ -205,7 +209,7 @@ if (prefersReduced) {
     defaults: { ease: "power3.out" },
     scrollTrigger: {            // ST instance #1 — ch1 text reveal
       trigger: "#ch1",
-      start: "top 75%",
+      start: "center 60%",
       toggleActions: "play none none none"
     }
   });
@@ -299,7 +303,7 @@ gsap.fromTo(
     ease: "power2.out",
     scrollTrigger: {
       trigger: "#ch2",
-      start: "top 70%",
+      start: "center 55%",
       toggleActions: "play none none none"
     }
   }
@@ -316,8 +320,8 @@ gsap.fromTo(
     ease: "none",
     scrollTrigger: {
       trigger: "#ch2",
-      start: "top 80%",
-      end: "top 20%",
+      start: "top 60%",
+      end: "top 10%",
       scrub: prefersReduced ? false : 1.2
     }
   }
@@ -327,8 +331,8 @@ gsap.fromTo(
 gsap.timeline({
   scrollTrigger: {
     trigger: "#ch3",
-    start: "top 70%",
-    end: "bottom center",
+    start: "center 55%",
+    end: "bottom 20%",
     scrub: prefersReduced ? false : true,
     // Reduced-motion: jump straight to tipped state on enter
     onEnter: prefersReduced
@@ -360,7 +364,7 @@ gsap.fromTo(
     ease: "power2.out",
     scrollTrigger: {
       trigger: "#ch3",
-      start: "top 45%",
+      start: "center 40%",
       toggleActions: "play none none none"
     }
   }
@@ -441,7 +445,7 @@ gsap.from("#ch5 .base-flower", {
   ease:            "back.out(1.7)",
   scrollTrigger: {
     trigger: "#ch5",
-    start: "top 70%",
+    start: "center 55%",
     toggleActions: "play none none none"
   },
   onStart: () => gsap.set("#ch5 .base-flower", { opacity: 1 })
@@ -461,7 +465,7 @@ gsap.fromTo(
     ease: "power2.out",
     scrollTrigger: {
       trigger: "#ch6",
-      start: "top 70%",
+      start: "center 55%",
       toggleActions: "play none none none"
     }
   }
@@ -481,7 +485,7 @@ if (!prefersReduced) {
 
   ScrollTrigger.create({
     trigger: "#ch6",
-    start: "top 70%",
+    start: "center 55%",
     end: "bottom top",
     onEnter:      () => sway.play(),
     onEnterBack:  () => sway.play(),
