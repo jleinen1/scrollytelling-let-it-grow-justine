@@ -1,7 +1,6 @@
 # Let It Grow: A Garden Themed Journey Through Javascript
 #### Video Demo:  https://jleinen1.github.io/scrollytelling-let-it-grow-justine/
 #### Description:
-Seeds & Systems
 A garden-themed, narrative journey that teaches core JavaScript concepts through visual storytelling. Each chapter pairs a JavaScript concept: variables, conditionals, localStorage, design systems with an illustration that reacts as you read and scroll. The metaphor is intentional: code, like a garden, is something you tend over time.
 Built with plain HTML, CSS, and JavaScript. GSAP handles all motion. 
 
