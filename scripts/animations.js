@@ -1,12 +1,64 @@
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
+// Always open at the top of the page regardless of browser scroll restoration
+// or any lingering URL hash.
 history.scrollRestoration = "manual";
 window.scrollTo(0, 0);
 
 // ─── reduced-motion check ─────────────────────────────────────────────────────
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// ─── scroll smoother ──────────────────────────────────────────────────────────
+// Reduced-motion users bypass the smoother entirely — page scrolls natively.
+let smoother;
+
+if (!prefersReduced) {
+  smoother = ScrollSmoother.create({
+    wrapper:  "#smooth-wrapper",
+    content:  "#smooth-content",
+    smooth:   1.4,          // tuned for readability — not too floaty
+    effects:  true,         // enables data-speed / data-lag attributes
+    normalizeScroll: true   // consistent feel across devices
+  });
+}
+
+// ─── theme system ─────────────────────────────────────────────────────────────
+// Reads from localStorage, falls back to system preference.
+// Exposes setTheme(mode) globally so the toggle and any future UI can call it.
+
+function getSystemTheme() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function setTheme(mode) {
+  // mode is "light", "dark", or "system"
+  const resolved = mode === "system" ? getSystemTheme() : mode;
+  document.documentElement.setAttribute("data-theme", resolved);
+  localStorage.setItem("theme", mode);  // store the intent, not the resolved value
+
+  // Sync any theme toggle buttons that exist in the DOM
+  document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
+    btn.setAttribute("aria-pressed", resolved === "dark" ? "true" : "false");
+  });
+}
+
+// Init: honour saved preference, fall back to system
+const savedTheme = localStorage.getItem("theme") || "system";
+setTheme(savedTheme);
+
+// Listen for system preference changes (for "system" mode users)
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+  if ((localStorage.getItem("theme") || "system") === "system") {
+    setTheme("system");
+  }
+});
+
 // ─── hero entrance ───────────────────────────────────────────────────────────
+// Three tweened steps:
+//   Step 1 — eyebrow fades in
+//   Step 2 — title lines slide up one by one (clip reveal)
+//   Step 3 — subtitle + CTA fade up together
+
 if (prefersReduced) {
   gsap.set([
     ".hero-eyebrow",
@@ -19,14 +71,14 @@ if (prefersReduced) {
 } else {
   const heroEntrance = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-  // Step 1
+  // Step 1: eyebrow
   heroEntrance.fromTo(
     ".hero-eyebrow",
     { opacity: 0, y: 14 },
     { opacity: 0.45, y: 0, duration: 0.5 }
   );
 
-  // Step 2
+  // Step 2: title lines clip-reveal upward, staggered
   heroEntrance.fromTo(
     ".hero-title-line",
     { y: "105%", opacity: 0 },
@@ -34,7 +86,7 @@ if (prefersReduced) {
     "-=0.15"
   );
 
-  // Step 3
+  // Step 3: subtitle then CTA
   heroEntrance.fromTo(
     ".hero-subtitle",
     { opacity: 0, y: 12 },
@@ -48,7 +100,7 @@ if (prefersReduced) {
     "-=0.25"
   );
 
-  // Seed packet drifts in
+  // Seed packet drifts in from slight offset
   heroEntrance.fromTo(
     ".hero-seed-packet",
     { opacity: 0, y: -20, rotation: 4 },
@@ -56,7 +108,7 @@ if (prefersReduced) {
     0.3   // starts early, runs in parallel with text
   );
 
-  // Sprout rises
+  // Sprout rises up from below
   heroEntrance.fromTo(
     ".hero-sprout",
     { opacity: 0, y: 30, scale: 0.85, transformOrigin: "bottom center" },
@@ -64,7 +116,7 @@ if (prefersReduced) {
     0.6
   );
 
-  // idle bob
+  // Gentle idle bob on the seed packet after entrance settles
   heroEntrance.to(
     ".hero-seed-packet",
     {
@@ -80,7 +132,7 @@ if (prefersReduced) {
 
 // ─── clouds ───────────────────────────────────────────────────────────────────
 
-// slow horizontal drifting
+// slow horizontal drifting — skip if reduced-motion
 if (!prefersReduced) {
   gsap.utils.toArray(".clouds img").forEach((cloud, i) => {
     gsap.to(cloud, {
@@ -108,6 +160,18 @@ gsap.utils.toArray(".clouds").forEach((cloudGroup) => {
     }
   });
 });
+
+// ─── smoother-enhanced moments ───────────────────────────────────────────────
+// These only run when smoother is active (i.e. not prefersReduced).
+// Moment 1: hero seed packet drifts at a slower scroll speed (parallax lag).
+// Moment 2: ch5 flower rises with a soft lag behind the scroll.
+if (!prefersReduced) {
+  // Moment 1 — hero visual scrolls at 0.6x speed, giving a parallax depth feel
+  smoother.effects(".hero-visual", { speed: 0.6 });
+
+  // Moment 2 — ch5 flower lags slightly behind scroll for a dreamy bloom feel
+  smoother.effects("#ch5 .base-flower", { lag: 0.3 });
+}
 
 // ─── ch1 — hero sequence ──────────────────────────────────────────────────────
 // Two clearly tweened steps:
@@ -141,7 +205,14 @@ if (prefersReduced) {
                </span>`)
     .join("");
 
-  const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+  const heroTimeline = gsap.timeline({
+    defaults: { ease: "power3.out" },
+    scrollTrigger: {            // ST instance #1 — ch1 text reveal
+      trigger: "#ch1",
+      start: "top 75%",
+      toggleActions: "play none none none"
+    }
+  });
 
   // Step 1a — label slides up and fades in
   heroTimeline.fromTo(
@@ -238,6 +309,24 @@ gsap.fromTo(
   }
 );
 
+// ─── ch2 — sprout scrubbed grow ──────────────────────────────────────────────
+// ST instance — scrubbed #2: sprout scales up as ch2 scrolls into view
+gsap.fromTo(
+  "#ch2 .base-sprout",
+  { scaleY: prefersReduced ? 1 : 0.3, opacity: prefersReduced ? 1 : 0, transformOrigin: "bottom center" },
+  {
+    scaleY: 1,
+    opacity: 1,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#ch2",
+      start: "top 80%",
+      end: "top 20%",
+      scrub: prefersReduced ? false : 1.2
+    }
+  }
+);
+
 // ─── ch3 — watering can tip ───────────────────────────────────────────────────
 gsap.timeline({
   scrollTrigger: {
@@ -262,6 +351,24 @@ gsap.timeline({
     duration: 0.5,
     ease: "power2.inOut"
   });
+
+// ─── ch3 — watering drop reveal ─────────────────────────────────────────────
+// ST instance — trigger-and-play #4: drop fades in once can has tipped
+gsap.fromTo(
+  ".watering-drop",
+  { opacity: 0, y: prefersReduced ? 0 : -16 },
+  {
+    opacity: 1,
+    y: 0,
+    duration: prefersReduced ? 0 : 0.6,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#ch3",
+      start: "top 45%",
+      toggleActions: "play none none none"
+    }
+  }
+);
 
 // ─── ch4 — day / night toggle ─────────────────────────────────────────────────
 const ch4      = document.querySelector("#ch4");
@@ -319,11 +426,13 @@ toggleBtn.addEventListener("click", () => {
     moon.style.display = "block";
     ch4.classList.add("chapter--dark");
     dayToNight.play();
+    setTheme("dark");
   } else {
     sun.style.display  = "block";
     moon.style.display = "none";
     ch4.classList.remove("chapter--dark");
     dayToNight.reverse();
+    setTheme("light");
   }
 });
 
@@ -342,20 +451,45 @@ gsap.from("#ch5 .base-flower", {
   onStart: () => gsap.set("#ch5 .base-flower", { opacity: 1 })
 });
 
+// ─── ch6 — garden entrance reveal ───────────────────────────────────────────
+// ST instance — trigger-and-play #5: all ch6 flowers stagger in from below
+gsap.fromTo(
+  ["#ch6 .base-roots", "#ch6 .small-flower--left", "#ch6 .small-flower--right",
+   "#ch6 .base-flower", "#ch6 .sun-flower--left",  "#ch6 .sun-flower--right"],
+  { opacity: prefersReduced ? 1 : 0, y: prefersReduced ? 0 : 40, transformOrigin: "bottom center" },
+  {
+    opacity: 1,
+    y: 0,
+    duration: prefersReduced ? 0 : 0.7,
+    stagger: prefersReduced ? 0 : 0.1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: "#ch6",
+      start: "top 70%",
+      toggleActions: "play none none none"
+    }
+  }
+);
+
 // ─── ch6 — idle sway ──────────────────────────────────────────────────────────
 if (!prefersReduced) {
-  gsap.to("#ch6 .base-flower", {
+  const sway = gsap.to("#ch6 .base-flower", {
     rotation: 6,
     transformOrigin: "bottom center",
     duration: 3,
     ease: "sine.inOut",
     repeat: -1,
     yoyo: true,
-    scrollTrigger: {
-      trigger: "#ch6",
-      start: "top 70%",
-      end: "bottom bottom",
-      toggleActions: "play pause resume pause"
-    }
+    paused: true   // start paused; ScrollTrigger callbacks control it
+  });
+
+  ScrollTrigger.create({
+    trigger: "#ch6",
+    start: "top 70%",
+    end: "bottom top",
+    onEnter:      () => sway.play(),
+    onEnterBack:  () => sway.play(),
+    onLeave:      () => sway.pause(),
+    onLeaveBack:  () => sway.pause()
   });
 }
