@@ -16,9 +16,9 @@ if (!prefersReduced) {
   smoother = ScrollSmoother.create({
     wrapper:  "#smooth-wrapper",
     content:  "#smooth-content",
-    smooth:   1.4,          // tuned for readability — not too floaty
-    effects:  true,         // enables data-speed / data-lag attributes
-    normalizeScroll: true   // consistent feel across devices
+    smooth:   1.4, 
+    effects:  true,  
+    normalizeScroll: true   
   });
 }
 
@@ -54,10 +54,6 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () 
 });
 
 // ─── hero entrance ───────────────────────────────────────────────────────────
-// Three tweened steps:
-//   Step 1 — eyebrow fades in
-//   Step 2 — title lines slide up one by one (clip reveal)
-//   Step 3 — subtitle + CTA fade up together
 
 if (prefersReduced) {
   gsap.set([
@@ -71,14 +67,14 @@ if (prefersReduced) {
 } else {
   const heroEntrance = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-  // Step 1: eyebrow
+  // Step 1
   heroEntrance.fromTo(
     ".hero-eyebrow",
     { opacity: 0, y: 14 },
     { opacity: 0.45, y: 0, duration: 0.5 }
   );
 
-  // Step 2: title lines clip-reveal upward, staggered
+  // Step 2
   heroEntrance.fromTo(
     ".hero-title-line",
     { y: "105%", opacity: 0 },
@@ -86,7 +82,7 @@ if (prefersReduced) {
     "-=0.15"
   );
 
-  // Step 3: subtitle then CTA
+  // Step 3
   heroEntrance.fromTo(
     ".hero-subtitle",
     { opacity: 0, y: 12 },
@@ -116,7 +112,7 @@ if (prefersReduced) {
     0.6
   );
 
-  // Gentle idle bob on the seed packet after entrance settles
+  // Gentle idle bob
   heroEntrance.to(
     ".hero-seed-packet",
     {
@@ -132,7 +128,7 @@ if (prefersReduced) {
 
 // ─── clouds ───────────────────────────────────────────────────────────────────
 
-// slow horizontal drifting — skip if reduced-motion
+// slow horizontal drifting, skip if reduced-motion
 if (!prefersReduced) {
   gsap.utils.toArray(".clouds img").forEach((cloud, i) => {
     gsap.to(cloud, {
